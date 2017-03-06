@@ -56,3 +56,8 @@ gulp.task('compass', function() {
 			gulp.dest('builds/development/css')
 			)
 });
+
+gulp.task('all', ['coffee', 'js', 'compass']);
+gulp.task('default', ['coffee', 'js', 'compass']);
+gulp.task('all', ['coffee', 'js', 'compass']);
+gulp.task('all', ['coffee', 'js', 'compass']);
