@@ -5,6 +5,8 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	compass = require('gulp-compass'),
 	connect = require('gulp-connect'),
+	gulpif = require('gulp-if'),
+	uglify = require('gulp-uglify'),
 	browserify = require('gulp-browserify');
 
 var env,
@@ -51,18 +53,11 @@ gulp.task('coffee', function() {
 
 gulp.task('js', function() {
 	gulp.src(jsSources)
-		.pipe(
-			concat('script.js')
-			)
-		.pipe(
-			browserify()
-			)
-		.pipe(
-			gulp.dest(outputDir + 'js')
-			)
-		.pipe(
-			connect.reload()
-			)
+		.pipe(concat('script.js'))
+		.pipe(browserify())
+		.pipe(gulpif(env === 'production', uglify()))
+		.pipe(gulp.dest(outputDir + 'js'))
+		.pipe(connect.reload())
 });
 
 gulp.task('compass', function() {
